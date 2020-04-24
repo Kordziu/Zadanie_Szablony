@@ -9,7 +9,7 @@ using namespace std;
 
 //dodaj i podstaw wynik za podany wektor
 template <typename Styp, int Swymiar>
-const SWektor& SWektor::operator += (const SWektor &w1){
+const SWektor<Styp, Swymiar>& SWektor<Styp, Swymiar>::operator += (const SWektor &w1){
  
   for(int i = 0; i < Swymiar; i++){
     this->tab[i] = this->tab[i] + w1[i]; 
@@ -19,8 +19,8 @@ const SWektor& SWektor::operator += (const SWektor &w1){
 
 //dodawanie dwóch wektorów
 template <typename Styp, int Swymiar>
-SWektor SWektor::operator + (const Wektor &w1) const{
-  SWektor wynik;
+SWektor<Styp, Swymiar> SWektor<Styp, Swymiar>::operator + (const SWektor &w1) const{
+  SWektor<Styp, Swymiar> wynik;
     for(int i = 0; i < Swymiar; i++){
       wynik[i] = this->tab[i] + w1[i];
     };
@@ -30,8 +30,8 @@ SWektor SWektor::operator + (const Wektor &w1) const{
 
 //odejmowanie dwóch wektorów
 template <typename Styp, int Swymiar>
-SWektor SWektor::operator - (const SWektor &w1) const{
-  SWektor wynik;
+SWektor<Styp, Swymiar> SWektor<Styp, Swymiar>::operator - (const SWektor &w1) const{
+  SWektor<Styp, Swymiar> wynik;
     for(int i = 0; i < Swymiar; i++){
 
     wynik[i] = this->tab[i] - w1[i];
@@ -42,14 +42,14 @@ SWektor SWektor::operator - (const SWektor &w1) const{
 
 //iloczyn skalarny
 template <typename Styp, int Swymiar>
-Styp SWektor::operator * (const SWektor &w1) const{
-  SWektor tmp;
+Styp SWektor<Styp, Swymiar>::operator * (const SWektor &w1) const{
+  SWektor<Styp, Swymiar> tmp;
   Styp wynik = 0;
     for(int i = 0; i < Swymiar; i++){
       tmp[i] = this->tab[i] * w1[i];
   };
     
-    for(i = 0; i < Swymiar; i++){
+    for(int i = 0; i < Swymiar; i++){
       wynik = wynik + tmp[i];
     }
   return wynik;
@@ -57,8 +57,8 @@ Styp SWektor::operator * (const SWektor &w1) const{
 
 //mnożenie wektora przez liczbę
 template <typename Styp, int Swymiar>
-SWektor SWektor::operator * (Styp liczba) const{
-  SWektor wynik;
+SWektor<Styp, Swymiar> SWektor<Styp, Swymiar>::operator * (Styp liczba) const{
+  SWektor<Styp, Swymiar> wynik;
     for(int i = 0; i < Swymiar; i++){
       wynik[i] = liczba * this->tab[i];
     }
@@ -68,8 +68,8 @@ SWektor SWektor::operator * (Styp liczba) const{
 
 //mnożenie liczba * wektor
 template <typename Styp, int Swymiar>
-SWektor operator * (Styp liczba, SWektor w1){
-  SWektor wynik;
+SWektor<Styp, Swymiar> operator * (Styp liczba, SWektor <Styp, Swymiar> w1){
+  SWektor<Styp, Swymiar> wynik;
 
   for(int i = 0; i < Swymiar; i++){
     wynik[i] = liczba * w1[i];
@@ -80,7 +80,7 @@ SWektor operator * (Styp liczba, SWektor w1){
 
 //porównanie dwóch wektorów
 template <typename Styp, int Swymiar>
-bool SWektor::operator == (const SWektor &w1) const{
+bool SWektor<Styp, Swymiar>::operator == (const SWektor &w1) const{
   
   for(int i = 0; i < Swymiar; i++){
     if(this->tab[i]!=w1[i]){
@@ -92,7 +92,7 @@ bool SWektor::operator == (const SWektor &w1) const{
 
 //porownanie != dwóch wektorów
 template <typename Styp, int Swymiar>
-bool SWektor::operator != (const SWektor &w1) const{
+bool SWektor<Styp, Swymiar>::operator != (const SWektor &w1) const{
  
   for(int i = 0; i < Swymiar; i++){
     if(this->tab[i]==w1[i]){
@@ -104,7 +104,7 @@ bool SWektor::operator != (const SWektor &w1) const{
 
 //dlugosc wektora
 template <typename Styp, int Swymiar>
-Styp Wektor::dlugosc() const{
+Styp SWektor<Styp, Swymiar>::dlugosc() const{
   Styp dlugosc = 0;
 
   for(int i = 0; i < Swymiar; i++){

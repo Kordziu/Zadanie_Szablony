@@ -13,14 +13,14 @@ public:
   SWektor() {for (int i = 0; i < Swymiar; i++){tab[i] = 0.0;}};
   SWektor(Styp * tab) {for (int i = 0; i < Swymiar; i++){this->tab[i] = tab[i];}};
   
-  const SWektor & operator += (const SWektor & W2);
-  SWektor operator + (const SWektor & W2) const;
-  SWektor operator - (const SWektor & W2) const;
-  Styp operator * (const SWektor & W2) const; //iloczyn skalarny
-  SWektor operator * (Styp liczba) const; //mnożenie wektor*liczba
+  const SWektor <Styp, Swymiar> & operator += (const SWektor<Styp, Swymiar> & W2);
+  SWektor<Styp, Swymiar> operator + (const SWektor<Styp, Swymiar> & W2) const;
+  SWektor<Styp, Swymiar> operator - (const SWektor<Styp, Swymiar> & W2) const;
+  Styp operator * (const SWektor<Styp, Swymiar> & W2) const; //iloczyn skalarny
+  SWektor<Styp, Swymiar> operator * (Styp liczba) const; //mnożenie wektor*liczba
 
-  bool operator == (const SWektor & W2) const;
-  bool operator != (const SWektor & W2) const;
+  bool operator == (const SWektor<Styp, Swymiar> & W2) const;
+  bool operator != (const SWektor<Styp, Swymiar> & W2) const;
 
   Styp dlugosc() const;
 
@@ -31,11 +31,11 @@ public:
 
 //mnozenie liczba*wektor
 template <typename Styp, int Swymiar>
-SWektor operator * (Styp l1, SWektor W2);
+SWektor<Styp, Swymiar> operator * (Styp l1, SWektor<Styp, Swymiar> W2);
 
 //Przeciążenie operatora >>
 template <typename Styp, int Swymiar>
-istream & operator >> (istream &is, SWektor &w1){
+istream & operator >> (istream &is, SWektor<Styp, Swymiar> &w1){
   
   for(int i = 0; i < ROZMIAR; i++){
     is >> w1[i];
