@@ -1,6 +1,7 @@
 #ifndef WEKTOR_HH
 #define WEKTOR_HH
 
+#include <cmath>
 #include "rozmiar.h"
 #include <iostream>
 using namespace std;
@@ -10,30 +11,140 @@ class SWektor {
   Styp tab[Swymiar];
 
 public:
-  SWektor() {for (int i = 0; i < Swymiar; i++){tab[i] = 0.0;}};
-  SWektor(Styp * tab) {for (int i = 0; i < Swymiar; i++){this->tab[i] = tab[i];}};
+  //////////// Konstruktor bezparametryczny i parametryczny ////////////
+  SWektor()
+  {for (int i = 0; i < Swymiar; i++){tab[i] = 0.0;}};
+  SWektor(Styp * tab)
+  {for (int i = 0; i < Swymiar; i++){this->tab[i] = tab[i];}};
+
+  /////////////// dodaj i podstaw ///////////////
+  const SWektor & operator += (const SWektor & w1)
+  {
+    for(int i = 0; i < Swymiar; i++){
+      this->tab[i] = this->tab[i] + w1[i]; 
+    };
+    return *this;
+  };
   
-  const SWektor <Styp, Swymiar> & operator += (const SWektor<Styp, Swymiar> & W2);
-  SWektor<Styp, Swymiar> operator + (const SWektor<Styp, Swymiar> & W2) const;
-  SWektor<Styp, Swymiar> operator - (const SWektor<Styp, Swymiar> & W2) const;
-  Styp operator * (const SWektor<Styp, Swymiar> & W2) const; //iloczyn skalarny
-  SWektor<Styp, Swymiar> operator * (Styp liczba) const; //mnożenie wektor*liczba
+  /////////////// dodawanie ///////////////
+  SWektor operator + (const SWektor & w1) const
+  {
+    SWektor<Styp, Swymiar> wynik; 
+      for(int i = 0; i < Swymiar; i++)
+      {
+        wynik[i] = this->tab[i] + w1[i];
+      };   
+    return wynik;
+  };
 
-  bool operator == (const SWektor<Styp, Swymiar> & W2) const;
-  bool operator != (const SWektor<Styp, Swymiar> & W2) const;
+  /////////////// odejmowanie ///////////////
+  SWektor operator - (const SWektor & w1) const
+  {
+    SWektor<Styp, Swymiar> wynik;
+      for(int i = 0; i < Swymiar; i++)
+      {
+         wynik[i] = this->tab[i] - w1[i];
+      };
+    return wynik;
+  };
 
-  Styp dlugosc() const;
+  /////////////// iloczyn skalarny ///////////////
+  Styp operator * (const SWektor & w1) const
+  {
+    SWektor<Styp, Swymiar> tmp;
+    Styp wynik = 0;
+      for(int i = 0; i < Swymiar; i++)
+      {
+        tmp[i] = this->tab[i] * w1[i];
+      };
+      for(int i = 0; i < Swymiar; i++)
+      {
+        wynik = wynik + tmp[i];
+      }
+    return wynik;
+  };
+  
+  /////////////// wektor * liczba ///////////////
+  SWektor operator * (Styp liczba) const
+  {
+    SWektor<Styp, Swymiar> wynik;
+      for(int i = 0; i < Swymiar; i++){
+        wynik[i] = liczba * this->tab[i];
+      }
+    return wynik;
+  };
 
-//Przeciążenia operatorów []
-  const Styp & operator [] (int index) const{return tab[index];}; //Styp z=W[3]
-  Styp & operator [] (int index){return tab[index];};
-};
+  /////////////// operator równości ///////////////
+  bool operator == (const SWektor & w1) const
+  {  
+    for(int i = 0; i < Swymiar; i++)
+    {
+      if(this->tab[i]!=w1[i])
+      {
+        return false;
+      }
+    }
+    return true;
+  };
 
-//mnozenie liczba*wektor
+  /////////////// operator nierówności ///////////////
+  bool operator != (const SWektor & w1) const
+  {
+    if(*this == w1)
+      {
+	return false;
+      }
+    return true;
+  };
+
+  /////////////// dlugosc wektora ///////////////
+  Styp dlugosc() const
+  {
+    Styp dlugosc = 0;
+      for(int i = 0; i < Swymiar; i++)
+      {
+        dlugosc = dlugosc + this->tab[i] * this->tab[i];
+      }
+  return sqrt(dlugosc);
+  };
+
+  /////////////// Przeciążenia operatorów [] ///////////////
+  const Styp & operator [] (int index) const //Styp z=W[3]
+  {
+    if (index < 0 || index >= ROZMIAR)
+    {
+      cerr << "Wartość spoza zakresu" << endl;
+      exit(1);
+    }
+    return tab[index];
+  };
+  
+  Styp & operator [] (int index)
+  {
+    if (index < 0 || index >= Swymiar)
+    {
+      cerr << "Wartość spoza zakresu" << endl;
+      exit(1);
+    }
+    return tab[index];
+  };
+
+}; //Koniec klasy
+
+/////////////// mnozenie liczba*wektor ///////////////
 template <typename Styp, int Swymiar>
-SWektor<Styp, Swymiar> operator * (Styp l1, SWektor<Styp, Swymiar> W2);
+SWektor<Styp, Swymiar> operator * (Styp liczba, SWektor<Styp, Swymiar> w1)
+{
+  SWektor<Styp, Swymiar> wynik;
 
-//Przeciążenie operatora >>
+  for(int i = 0; i < Swymiar; i++){
+    wynik[i] = liczba * w1[i];
+  }
+
+  return wynik;
+}
+
+/////////////// Przeciążenie operatora >> ///////////////
 template <typename Styp, int Swymiar>
 istream & operator >> (istream &is, SWektor<Styp, Swymiar> &w1){
   
@@ -44,8 +155,7 @@ istream & operator >> (istream &is, SWektor<Styp, Swymiar> &w1){
   return is;
 }
 
-
-//Przeciążenie operatora << 
+/////////////// Przeciążenie operatora << ///////////////
 template <typename Styp, int Swymiar>
 ostream & operator << (ostream &os, const SWektor<Styp, Swymiar> &w1){
   int i;  
@@ -60,7 +170,6 @@ ostream & operator << (ostream &os, const SWektor<Styp, Swymiar> &w1){
   os << endl;
   return os;
 }
-
 
 
 #endif

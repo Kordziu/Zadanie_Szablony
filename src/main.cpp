@@ -22,9 +22,11 @@ int main()
   SWektor<double, 3> W(init);
   SWektor<double, 3> W2(init2);
   SWektor<double, 3> Wynik;
-
-  Wynik = W + W2;
-
+  //double Wynik;
+  Wynik = 3.0 * W;
+  
+  // if(W!=W2){ cout << "nierowne" <<endl;};
+  
   cout << W << endl;
   cout << W2 << endl;
   cout << Wynik << endl;
