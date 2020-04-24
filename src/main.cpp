@@ -16,9 +16,18 @@ using namespace std;
 
 int main()
 { 
-  SWektor<double, 3> W;
+  double init[]={1, 2, 3};
+  double init2[]={1, 1, 0};
+  
+  SWektor<double, 3> W(init);
+  SWektor<double, 3> W2(init2);
+  SWektor<double, 3> Wynik;
+
+  Wynik = W + W2;
 
   cout << W << endl;
+  cout << W2 << endl;
+  cout << Wynik << endl;
 
 
   
