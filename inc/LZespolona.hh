@@ -24,6 +24,13 @@ struct  LZespolona {
   double modul();
   LZespolona sprzezenie();
   void wyswietl();
+  LZespolona operator = (double liczba)
+  {
+    re=liczba;
+    im=0.0;
+    return *this;
+  }
+  
 };
 
 
@@ -39,6 +46,6 @@ LZespolona operator / (LZespolona  Skl1,  LZespolona  Skl2);
 LZespolona operator / (LZespolona, double);
 ostream& operator << (ostream&, LZespolona);
 istream& operator >> (istream&, LZespolona&);
-bool operator == (LZespolona, LZespolona);
-
+bool operator == (const LZespolona, const LZespolona);
+bool operator != (const LZespolona, const LZespolona); 
 #endif

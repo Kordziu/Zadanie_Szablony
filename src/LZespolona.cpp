@@ -163,7 +163,19 @@ LZespolona operator / (LZespolona Skl1, double liczba)
   return Wynik;
 }
 
-bool operator == (LZespolona Skl1, LZespolona Skl2)
+bool operator == (const LZespolona Skl1,const LZespolona Skl2) 
 {
-  return Skl1.re == Skl2.re && Skl1.im == Skl2.im;
+  if(Skl1.re == Skl2.re && Skl1.im == Skl2.im){
+    return true;
+  }
+  return false;
+}
+
+bool operator != (const LZespolona Skl1, const LZespolona Skl2) 
+{
+  if(Skl1 == Skl2)
+    {
+      return false;
+    }
+  return true;
 }

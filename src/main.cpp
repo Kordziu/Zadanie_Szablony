@@ -18,19 +18,20 @@ using namespace std;
 int main()
 { 
   LZespolona init[]={LZespolona(1.0,-2.0), LZespolona(2.0,1.0), LZespolona(3.0,2.0)};
-  //LZespolona init2[]={(1+1i), (1+1i), (0+0i)};
+  LZespolona init2[]={LZespolona(1.0,1.0), LZespolona(1.0,1.0), LZespolona(0.0,0.0)};
   
   SWektor<LZespolona, 3> W(init);
-  //SWektor<LZespolona, 3> W2(init2);
-  //SWektor<LZespolona, 3> Wynik;
+  SWektor<LZespolona, 3> W2(init2);
+  SWektor<LZespolona, 3> Wynik;
   //double Wynik;
-  // Wynik = W + W2;
+  //LZespolona Wynik;
+  Wynik = W * 5.0;
   
-  // if(W!=W2){ cout << "nierowne" <<endl;};
+  //if(W==W2){ cout << "rowne" <<endl;};
   
   cout << W << endl;
-  //cout << W2 << endl;
-  //cout << Wynik << endl;
+  cout << W2 << endl;
+  cout << Wynik << endl;
   
   //UkladRownan U;
   //cin >> U;
