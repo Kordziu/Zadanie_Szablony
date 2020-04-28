@@ -22,8 +22,8 @@ struct  LZespolona {
   LZespolona(double);
   LZespolona(double, double);
   double modul();
-  LZespolona sprzezenie();
-  void wyswietl();
+  LZespolona sprzezenie() const;
+  void wyswietl() const;
   LZespolona operator = (double liczba)
   {
     re=liczba;

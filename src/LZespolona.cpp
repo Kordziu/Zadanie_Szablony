@@ -22,14 +22,14 @@ double LZespolona::modul() {
   return sqrt((re * re) + (im * im));
 }
 
-LZespolona LZespolona::sprzezenie() {
+LZespolona LZespolona::sprzezenie() const{
   LZespolona Wynik;
   Wynik.re = re;
   Wynik.im = -im;
   return Wynik;
 }
 
-void LZespolona::wyswietl() {
+void LZespolona::wyswietl() const{
   cout << this;
 }
 
@@ -160,6 +160,16 @@ LZespolona operator / (LZespolona Skl1, double liczba)
     Wynik.im = Skl1.im / liczba;
   }
   
+  return Wynik;
+}
+
+LZespolona operator * (LZespolona Skl1, double liczba)
+{
+  LZespolona Wynik = 0;
+
+  Wynik.re = Skl1.re * liczba;
+  Wynik.im = Skl1.im * liczba;
+
   return Wynik;
 }
 

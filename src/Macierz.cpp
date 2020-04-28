@@ -4,74 +4,25 @@
 
 using namespace std;
 
-//Transpozycja
-Macierz Macierz::transpozycja() const{
-  Wektor kolumna;
-  Macierz temp;
-
-  for(int i = 0; i < ROZMIAR; i++){
-    kolumna = zwroc_kolumne(i);
-    temp[i] = kolumna;
-  }
-  return temp;
-}
-
-
 //Mnożenie macierz * wektor
-Wektor Macierz::operator * (const Wektor w1) const{
-  Wektor wynik;
+Wektor Macierz::operator * (const Wektor w1) const
 
-  for(int i = 0; i < ROZMIAR; i++){
-    wynik[i] = tab[i] * w1;
-  }
-  return wynik;
-}
 
 //Mnożenie macierz * macierz
-Macierz Macierz::operator * (Macierz m1) const{
-  Macierz wynik;
+Macierz Macierz::operator * (Macierz m1) const
 
-  for(int i = 0; i < ROZMIAR; i++){
-    for(int j=0; j < ROZMIAR; j++){
-      wynik[i][j] = tab[i] * m1.zwroc_kolumne(j);
-  }
-  }
-  return wynik;
-}
 
 //Dodawanie macierzy
-Macierz Macierz::operator + (const Macierz m1) const{
-  Macierz wynik;
+Macierz Macierz::operator + (const Macierz m1) const
 
-  for(int i = 0; i < ROZMIAR; i++){
-    for(int j = 0; j < ROZMIAR; j++){
-    wynik[i] = tab[i] + m1[i];
-    }
-  }
-  return wynik;
-}
 
 //Odejmowanie macierzy
-Macierz Macierz::operator - (const Macierz m1) const{
-  Macierz wynik;
+Macierz Macierz::operator - (const Macierz m1) const
 
-  for(int i = 0; i < ROZMIAR; i++){
-    for(int j = 0; j < ROZMIAR; j++){
-    wynik[i] = tab[i] - m1[i];
-    }
-  }
-  return wynik;
-}
 
 //Mnożenie macierzy przez liczbę
-Macierz Macierz::operator * (const double liczba) const{
-  Macierz wynik;
+Macierz Macierz::operator * (const double liczba) const
 
-  for(int i = 0; i < ROZMIAR; i++){
-  wynik[i] = tab[i] * liczba;
-  }
-  return wynik;
-}
 
 //porównanie == dla macierzy
 bool Macierz::operator == (const Macierz &m1) const{
@@ -85,14 +36,13 @@ bool Macierz::operator == (const Macierz &m1) const{
 }
 
 //porównanie != dla macierzy
-bool Macierz::operator != (const Macierz &m1) const{
-
-  for(int i = 0; i < ROZMIAR; i++){
-    if(tab[i] != m1[i]){
-      return true;
+bool Macierz::operator != (const Macierz &m1) const
+{
+  if(*this == m1)
+    {
+      return false;
     }
-  }
-  return false;
+  return true;
 }
 
 
@@ -115,27 +65,6 @@ Macierz Macierz::zmien_kolumne(int nr_kolumny, Wektor nowa){
   return pom;
 }
 
-//konstruktor bezparametryczny
-Macierz::Macierz(){
-  
-  for (int i = 0; i < ROZMIAR; i++){
-    tab[i] = Wektor();
-  }
-}
-
-//konstruktor parametryczny
-Macierz::Macierz(Wektor *w1){
-  for(int i = 0; i < ROZMIAR; i++){
-    tab[i] = w1[i];
-  }
-}
-
-// konstruktor kopiujący                                            
-Macierz::Macierz(const Macierz & m){
-  for(int i = 0; i < ROZMIAR; i++){
-    tab[i] = m[i];
-  }
-}         
 
 
 //przeciazenie operatora >>
