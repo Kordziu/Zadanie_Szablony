@@ -14,7 +14,7 @@ public:
   //////////// Konstruktor bezparametryczny i parametryczny ////////////
   SWektor()
   {for (int i = 0; i < Swymiar; i++){tab[i] = 0.0;}};
-  SWektor(Styp * tab)
+  explicit SWektor(Styp * tab)
   {for (int i = 0; i < Swymiar; i++){this->tab[i] = tab[i];}};
 
   /////////////// dodaj i podstaw ///////////////
@@ -52,7 +52,8 @@ public:
   Styp operator * (const SWektor & w1) const
   {
     SWektor<Styp, Swymiar> tmp;
-    Styp wynik = 0;
+    Styp wynik;
+    wynik = 0;
       for(int i = 0; i < Swymiar; i++)
       {
         tmp[i] = this->tab[i] * w1[i];
