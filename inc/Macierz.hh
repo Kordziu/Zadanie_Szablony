@@ -1,4 +1,4 @@
- #ifndef MACIERZ_HH
+#ifndef MACIERZ_HH
 #define MACIERZ_HH
 
 #include "Wektor.hh"
@@ -44,7 +44,6 @@ public:
       for(int i = 0; i < Swymiar; i++)
       {
         wynik[i] = tab[i] * w1;
-	cout << "wynik i" << wynik[i] <<endl;
       }
       return wynik; 
   };
@@ -166,47 +165,48 @@ public:
   };
   
   //////////// Iloczyn liczb na przekątnej macierzy ////////////
-  double przekatna() const
+  Styp przekatna() const
   {
-    double wynik = 1.0;
+    Styp wynik;
+    wynik = 1;
       for(int i = 0; i < Swymiar; i++)
       {
-        wynik *= tab[i][i];
+        wynik = wynik * tab[i][i];
       }
     return wynik;	
   };
 
   /////////////// Wyznacznik z gaussa ///////////////
-  double wyznacznik() const
-  {  
+  Styp wyznacznik() const
+  {
     int licznik = 0; //ile razy zamieniliśmy wiersze
     Macierz pom(*this); //stworzenie kopii żeby nie zmieniać obiektu
-      for(int i = 0; i < Swymiar - 1; i++)
+    Styp wynik;
+    
+    for(int i = 0; i < Swymiar - 1; i++)
       {
-        int k = i;
-        bool kolumna_ready = false;  
-	  while(pom[i][i] == 0.0)
-	  { //dopóki wartość na przekątnej nie będzie równa 0	
-	    if(k++ >= Swymiar)
-	    {//jeśli przeszliśmy całą kolumne
-	      kolumna_ready = true; //ustaw ją jako gotową
-              break;
+        for(int j = i+1; j < Swymiar; j++)
+	  {
+	    if(pom[i][i] != 0.0){
+	      Styp val = pom[j][i] / pom[i][i];//zmienna do ustalenia wartości przez którą będziemy mnożyć wiersz który będzie odejmowany
+	      pom[j] = pom[j] - pom[i] * val;//wyzerowanie punktu	
 	    }
-	    swap(pom[i], pom[k]); //w przeciwnym razie zamień wiersze
-	    licznik++; //zwiększ licznik
-          }
-	if(kolumna_ready)
-	  { //jeśli kolumna jest gotowa to kontynuuj pętlę while
-           continue;
-          }
-          for(int j = i+1; j < Swymiar; j++)
-	  {		  
-            double val = pom[j][i] / pom[i][i];//zmienna do ustalenia wartości przez którą będziemy mnożyć wiersz który będzie odejmowany
-	    pom[j] = pom[j] - pom[i] * val;//wyzerowanie punktu	
-          }
-        }
-      double wynik = pom.przekatna(); //wyliczenie wyznacznika z wartości na przekątnej macierzy trójkątnej
-    wynik *= pow(-1, licznik%2); //jeśli licznik jest jest parzysty to nasz wyznacznik mnożymy przez -1^0 czyli *1 i nic się nie zmienia, jeśli jest nieparzysty to zmienia się znak wyznacznika
+	    else
+	      {
+		for(int k = i + 1; k < Swymiar; k++)//szukanie zera
+		  { 	
+		    if(pom[k][i] != 0.0)//Jeśli nie jest zerem
+		      {
+			swap(pom[i], pom[k]); // zamień wiersze
+			licznik++; //zwiększ licznik
+			k = Swymiar; //wyjście z pętli
+		      }
+		  }
+	      }
+	  }
+      }
+	wynik = pom.przekatna(); //wyliczenie wyznacznika z wartości na przekątnej macierzy trójkątnej
+    wynik = wynik * pow(-1, licznik%2); //jeśli licznik jest jest parzysty to nasz wyznacznik mnożymy przez -1^0 czyli *1 i nic się nie zmienia, jeśli jest nieparzysty to zmienia się znak wyznacznika
 
    return wynik;
   };

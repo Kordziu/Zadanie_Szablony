@@ -165,12 +165,34 @@ LZespolona operator / (LZespolona Skl1, double liczba)
 
 LZespolona operator * (LZespolona Skl1, double liczba)
 {
-  LZespolona Wynik = 0;
+  LZespolona Wynik;
+  Wynik = 0;
 
   Wynik.re = Skl1.re * liczba;
   Wynik.im = Skl1.im * liczba;
 
   return Wynik;
+}
+
+LZespolona operator *= (double liczba, LZespolona Skl1)
+{
+  LZespolona Wynik;
+  Wynik = 0;
+
+  Wynik.re = Skl1.re * liczba;
+  Wynik.im = Skl1.im * liczba;
+  Skl1 = Wynik;
+  
+  return Skl1;
+}
+
+LZespolona operator *= (LZespolona Skl1, LZespolona Skl2)
+{
+  LZespolona  Wynik;
+  Wynik.re = (Skl1.re * Skl2.re) - (Skl1.im * Skl2.im);
+  Wynik.im = (Skl1.im * Skl2.re) + (Skl2.im * Skl1.re);
+  Skl1 = Wynik;
+  return Skl1;
 }
 
 bool operator == (const LZespolona Skl1,const LZespolona Skl2) 
@@ -184,6 +206,24 @@ bool operator == (const LZespolona Skl1,const LZespolona Skl2)
 bool operator != (const LZespolona Skl1, const LZespolona Skl2) 
 {
   if(Skl1 == Skl2)
+    {
+      return false;
+    }
+  return true;
+}
+
+bool operator == (const LZespolona Skl1, const double zero)
+{
+  if(Skl1.re == zero && Skl1.im == zero)
+    {
+      return true;
+    }
+  return false;
+}
+
+bool operator != (const LZespolona Skl1, const double zero)
+{
+  if(Skl1 == zero)
     {
       return false;
     }
