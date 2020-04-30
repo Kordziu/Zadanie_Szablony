@@ -42,7 +42,7 @@ public:
     wyznacznik_glowny = get_A().wyznacznik();
     SWektor<Styp, Swymiar> wolne;
     wolne = get_b(); // Kopia wektora wyrazów wolnych
-      if(wyznacznik_glowny == 0.0)
+      if(wyznacznik_glowny != 0.0)
 	{ // Jeśli wyznacznik jest różny od 0
 	  for(int i = 0; i < ROZMIAR; i++)
 	    {
@@ -75,7 +75,6 @@ istream& operator >> (istream &is, UkladRownan<Styp, Swymiar> &UklRown)
   UklRown = UkladRownan(tempm, tempw);
   return is;
 }
-
 
 template <typename Styp, int Swymiar>
 ostream& operator << (ostream &os, const UkladRownan <Styp, Swymiar> &UklRown )

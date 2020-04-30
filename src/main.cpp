@@ -67,7 +67,7 @@ int main()
   //switch(a.get())
   //{
   // case 'r': 
-   UkladRownan<double, 3> U;
+   UkladRownan<LZespolona, 3> U;
      cin >> U;
      cout << U << endl;
       //  break;
