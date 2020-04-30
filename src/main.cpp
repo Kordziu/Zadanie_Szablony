@@ -24,8 +24,10 @@ int main()
   //  SWektor<LZespolona, 3> W(init);
   // SWektor<LZespolona, 3> W2(init2);
   // SWektor<LZespolona, 3> W3(init3);
-  // SWektor<LZespolona, 3> Wynik;
-
+  //Macierz<double, 3> Wynik;
+  //cin >> Wynik;
+  //cout << Wynik;
+  
   // SWektor<LZespolona, 3> data[]={W, W2, W3};
   
   // Macierz<LZespolona, 3> M(data);
@@ -59,15 +61,15 @@ int main()
   // Macierz <double, 3> MAD(minit);
   //cout << MAD <<endl;
   //cout << MAD.wyznacznik() <<endl;
-
+    
 /////////////////////////////////////// FAKTYCZNY PROGRAM ///////////////////////////////////////////////////////
   
   //switch(a.get())
   //{
   // case 'r': 
-      UkladRownan<double, 3> U;
-      cin >> U;
-      cout << U << endl;
+   UkladRownan<double, 3> U;
+     cin >> U;
+     cout << U << endl;
       //  break;
 
       //   case 'z':
