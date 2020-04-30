@@ -35,7 +35,6 @@ public:
   
   SWektor<Styp, Swymiar> Oblicz() const
   {
-    cout<< 'elo'<<endl;
     Macierz<Styp, Swymiar> temp;
     temp = get_A(); // Kopia macierzy głównej, żeby nie pracować na oryginale
     Styp tab_wyznacznikow[Swymiar]; // Tablica z wynikami x1, x2... żeby potem wrzucić ją do Wektora wynikowego
@@ -43,7 +42,7 @@ public:
     wyznacznik_glowny = get_A().wyznacznik();
     SWektor<Styp, Swymiar> wolne;
     wolne = get_b(); // Kopia wektora wyrazów wolnych
-      if(abs(wyznacznik_glowny) > dokladnosc)
+      if(wyznacznik_glowny == 0.0)
 	{ // Jeśli wyznacznik jest różny od 0
 	  for(int i = 0; i < ROZMIAR; i++)
 	    {
