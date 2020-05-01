@@ -1,8 +1,8 @@
 #ifndef WEKTOR_HH
 #define WEKTOR_HH
 
+#include "LZespolona.hh"
 #include <cmath>
-#include "rozmiar.h"
 #include <iostream>
 using namespace std;
 
@@ -99,20 +99,20 @@ public:
   };
 
   /////////////// dlugosc wektora ///////////////
-  Styp dlugosc() const
+  double dlugosc() const
   {
-    Styp dlugosc = 0;
+    double dlugosc = 0;
       for(int i = 0; i < Swymiar; i++)
       {
-        dlugosc = dlugosc + this->tab[i] * this->tab[i];
+        dlugosc = dlugosc + kwadrat(tab[i]);
       }
-  return sqrt(dlugosc);
+    return sqrt(dlugosc);
   };
-
+  
   /////////////// Przeciążenia operatorów [] ///////////////
   const Styp & operator [] (int index) const //Styp z=W[3]
   {
-    if (index < 0 || index >= ROZMIAR)
+    if (index < 0 || index >= Swymiar)
     {
       cerr << "Wartość spoza zakresu" << endl;
       exit(1);
@@ -132,6 +132,7 @@ public:
 
 }; //Koniec klasy
 
+
 /////////////// mnozenie liczba*wektor ///////////////
 template <typename Styp, int Swymiar>
 SWektor<Styp, Swymiar> operator * (Styp liczba, SWektor<Styp, Swymiar> w1)
@@ -149,8 +150,15 @@ SWektor<Styp, Swymiar> operator * (Styp liczba, SWektor<Styp, Swymiar> w1)
 template <typename Styp, int Swymiar>
 istream & operator >> (istream &is, SWektor<Styp, Swymiar> &w1){
   
-  for(int i = 0; i < ROZMIAR; i++){
+  for(int i = 0; i < Swymiar; i++){
+    if(is){ // Jeśli is jest pusty wyrzuć błąd danych (np niekompletna macierz/wektor) Bez tego ifa jak brakowało danych program uzupełniał je sobie zerami (data2.dat
     is >> w1[i];
+    }
+    else
+      {
+	cerr << "Błąd danych" << endl;
+	exit(1);
+      }
   }
 
   return is;

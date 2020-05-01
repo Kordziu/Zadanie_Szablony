@@ -4,12 +4,12 @@
 #include <iostream>
 #include "Macierz.hh"
 #include "Wektor.hh"
-#include "rozmiar.h"
 
 using namespace std;
 
 template<typename Styp, int Swymiar>
-class UkladRownan {
+class UkladRownan
+{
   Macierz <Styp, Swymiar> A;
   SWektor <Styp, Swymiar> b;
 public:
@@ -29,9 +29,15 @@ public:
     SWektor<Styp, Swymiar> wynik;
     wynik = get_A() * Oblicz() - get_b();
     return wynik;
-  } ;
+  };
 
-  Styp dl_bledu() const;
+  double dl_bledu() const
+  {
+    double wynik;
+    wynik = w_bledu().dlugosc();
+    return wynik;
+  };
+  
   
   SWektor<Styp, Swymiar> Oblicz() const
   {
@@ -44,7 +50,7 @@ public:
     wolne = get_b(); // Kopia wektora wyrazów wolnych
       if(wyznacznik_glowny != 0.0)
 	{ // Jeśli wyznacznik jest różny od 0
-	  for(int i = 0; i < ROZMIAR; i++)
+	  for(int i = 0; i < Swymiar; i++)
 	    {
 	      temp = temp.zmien_kolumne(i, wolne); //zamien kolumnę na wektor wyrazów wolnych
 	      tab_wyznacznikow[i] = temp.wyznacznik(); //wyliczenie wyznacznika nowej macierzy
@@ -71,19 +77,20 @@ istream& operator >> (istream &is, UkladRownan<Styp, Swymiar> &UklRown)
 
   is >> tempm;
   is >> tempw;
+  
+  UklRown = UkladRownan<Styp, Swymiar>(tempm, tempw);
 
-  UklRown = UkladRownan(tempm, tempw);
   return is;
 }
 
 template <typename Styp, int Swymiar>
 ostream& operator << (ostream &os, const UkladRownan <Styp, Swymiar> &UklRown )
 {
-  cout << "Macierz główna: " << endl << UklRown.get_A() << endl;
+  cout << "Macierz główna: " << endl << UklRown.get_A().transpozycja() << endl;
   cout << "Wektor wyrazów wolnych: " << endl << UklRown.get_b() << endl;
   cout << "Rozwiązanie (x1, x2, ... xn): " << endl << UklRown.Oblicz() << endl;
   cout << "Wektor błędu: Ax-b = " << UklRown.w_bledu() << endl;
-  // cout << "Długość wektora błędu: |Ax-b| = " << UklRown.dl_bledu() << endl;
+  cout << "Długość wektora błędu: |Ax-b| = " << UklRown.dl_bledu() << endl;
   return os;
 }
 
