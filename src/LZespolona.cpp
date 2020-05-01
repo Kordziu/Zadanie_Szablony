@@ -229,3 +229,14 @@ bool operator != (const LZespolona Skl1, const double zero)
     }
   return true;
 }
+
+//Funkcje potrzebne do poprawnego liczenia dlugosci wektora
+double kwadrat(double a)
+{
+  return a*a;
+}
+
+double kwadrat(LZespolona a)
+{
+  return a.re*a.re + a.im*a.im;
+}

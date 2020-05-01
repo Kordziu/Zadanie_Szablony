@@ -77,8 +77,9 @@ istream& operator >> (istream &is, UkladRownan<Styp, Swymiar> &UklRown)
 
   is >> tempm;
   is >> tempw;
-
+  
   UklRown = UkladRownan<Styp, Swymiar>(tempm, tempw);
+
   return is;
 }
 
@@ -89,7 +90,7 @@ ostream& operator << (ostream &os, const UkladRownan <Styp, Swymiar> &UklRown )
   cout << "Wektor wyrazów wolnych: " << endl << UklRown.get_b() << endl;
   cout << "Rozwiązanie (x1, x2, ... xn): " << endl << UklRown.Oblicz() << endl;
   cout << "Wektor błędu: Ax-b = " << UklRown.w_bledu() << endl;
-  //cout << "Długość wektora błędu: |Ax-b| = " << UklRown.dl_bledu() << endl;
+  cout << "Długość wektora błędu: |Ax-b| = " << UklRown.dl_bledu() << endl;
   return os;
 }
 

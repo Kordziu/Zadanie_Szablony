@@ -104,7 +104,7 @@ public:
     double dlugosc = 0;
       for(int i = 0; i < Swymiar; i++)
       {
-        dlugosc = dlugosc + tab[i] * tab[i];
+        dlugosc = dlugosc + kwadrat(tab[i]);
       }
     return sqrt(dlugosc);
   };
@@ -132,17 +132,6 @@ public:
 
 }; //Koniec klasy
 
-/////////////// specjalizacja długości dla zespolonej ///////////////
-//template <typename LZespolona, int Swymiar>
-//double dlugosc()
-//  {
-//    double dlugosc = 0;
-//    for(int i = 0; i < Swymiar; i++)
-//      {
-//  	dlugosc = dlugosc + (tab[i].re * tab[i].re) + (tab[i].im * tab[i].im);
-//      }
-//    return sqrt(dlugosc);
-// };
 
 /////////////// mnozenie liczba*wektor ///////////////
 template <typename Styp, int Swymiar>
@@ -162,7 +151,14 @@ template <typename Styp, int Swymiar>
 istream & operator >> (istream &is, SWektor<Styp, Swymiar> &w1){
   
   for(int i = 0; i < Swymiar; i++){
+    if(is){ // Jeśli is jest pusty wyrzuć błąd danych (np niekompletna macierz/wektor) Bez tego ifa jak brakowało danych program uzupełniał je sobie zerami (data2.dat
     is >> w1[i];
+    }
+    else
+      {
+	cerr << "Błąd danych" << endl;
+	exit(1);
+      }
   }
 
   return is;

@@ -48,6 +48,8 @@ bool operator == (const LZespolona, const LZespolona);
 bool operator != (const LZespolona, const LZespolona);
 bool operator == (const LZespolona, const double);
 bool operator != (const LZespolona, const double);
+double kwadrat(double);
+double kwadrat(LZespolona);
 
 //inline bool operator > (LZespolona lz, double l1)
 //{
