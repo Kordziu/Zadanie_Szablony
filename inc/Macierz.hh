@@ -2,7 +2,6 @@
 #define MACIERZ_HH
 
 #include "Wektor.hh"
-#include "rozmiar.h"
 #include <iostream>
 
 using namespace std;
@@ -215,11 +214,13 @@ public:
 
 template<typename Styp, int Swymiar>
 istream& operator >> (istream &is, Macierz<Styp, Swymiar> &m1)
-{  
+{
   for(int i = 0; i < Swymiar; i++)
   {   
-    is >> m1[i];  
+    is >> m1[i];
   }
+  // m1.transpozycja();
+  
   return is;
 }
 

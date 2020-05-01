@@ -3,12 +3,6 @@
 
 #include<iostream>
 
-/*!
- *  Plik zawiera definicje struktury LZesplona oraz zapowiedzi
- *  przeciazen operatorow arytmetycznych dzialajacych na tej 
- *  strukturze.
- */
-
 using namespace std;
 
 /*!
@@ -55,30 +49,22 @@ bool operator != (const LZespolona, const LZespolona);
 bool operator == (const LZespolona, const double);
 bool operator != (const LZespolona, const double);
 
-inline bool operator > (LZespolona lz, double l1)
-{
-  if(lz.re > l1 && lz.im == 0)
-    {
-      return true;
-    }
-  return false;
-}
+//inline bool operator > (LZespolona lz, double l1)
+//{
+  // if(lz.re > l1 && lz.im == 0)
+    //  {
+      //    return true;
+      //  }
+  // return false;
+  //}
 
-inline bool operator < (LZespolona lz, double l1)
-{
-  if(lz > l1)
-    {
-      return false;
-    }
-  return true;
-}
-
-inline LZespolona abs(LZespolona LZ)
-{
-  LZ.re = abs(LZ.re);
-  LZ.im = abs(LZ.im);
-  
-  return LZ;
-}
+//inline bool operator < (LZespolona lz, double l1)
+//{
+//  if(lz > l1)
+//    {
+//      return false;
+//    }
+//  return true;
+//}
 
 #endif

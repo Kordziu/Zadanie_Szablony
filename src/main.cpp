@@ -16,7 +16,39 @@ using namespace std;
 // Program działa poprawnie również po zmianie zadanego rozmiaru.
 
 int main()
-{ 
+{
+  char a;
+  cin >> a;
+  switch(a)
+  {
+    case 'r':
+      {
+        UkladRownan<double, 5> U;
+        cin >> U;
+        cout << U << endl;
+        break;
+      }
+      
+     case 'z':
+      {
+        UkladRownan<LZespolona, 5> U;
+        cin >> U;
+        cout << U << endl;
+        break;
+       }
+  default:
+    {
+      cerr << "Niepoprawny typ równania" << endl;
+    }
+  }
+
+
+  return 0;
+}
+
+
+///////////////////////// TESTY TESTY TESTY TESTY TESTY ////////////////////////
+
   //LZespolona init[]={LZespolona(1.0,-2.0), LZespolona(2.0,1.0), LZespolona(3.0,2.0)};
   // LZespolona init2[]={LZespolona(1.0,1.0), LZespolona(1.0,1.0), LZespolona(0.0,0.0)};
   // LZespolona init3[]={LZespolona(0.0,3.0), LZespolona(2.0,-1.0), LZespolona(-1.0,5.0)};
@@ -62,22 +94,4 @@ int main()
   //cout << MAD <<endl;
   //cout << MAD.wyznacznik() <<endl;
     
-/////////////////////////////////////// FAKTYCZNY PROGRAM ///////////////////////////////////////////////////////
-  
-  //switch(a.get())
-  //{
-  // case 'r': 
-   UkladRownan<LZespolona, 3> U;
-     cin >> U;
-     cout << U << endl;
-      //  break;
-
-      //   case 'z':
-      // UkladRownan<LZespolona, 3> U;
-      //cin >> U;
-      //cout << U << endl;
-      //}
-
-
-  return 0;
-}
+ 
