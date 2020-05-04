@@ -7,13 +7,13 @@
 using namespace std;
 
 // Program wczytuje dane z pliku w sposób: cat data.dat | ./uklad_rownan
-// Dane w pliku powinny być zapisane wierszowo. Ostanim wierszem jest wektor
-// wyrazów wolnych. Program został przetestowany dla załączonych plików data.dat
-// data2.dat, żeby kolejno sprawdzić poprawność dla zwykłego rozwiązania, oraz
-//braku rozwiązań. Wyniki zostały porównane z obliczeniami 'na kartce' oraz z
-//kalkulatorem online są zgodne. Na podstawie tych i wielu wcześniejszych testów
+// UWAGA! Macierz jest wczytywana w postaci transponowanej. Ostanim wierszem
+// jest wektor wyrazów wolnych. Program został przetestowany dla załączonych
+// plików data.dat, data2.dat, data3.dat, data4.dat żeby kolejno sprawdzić
+// poprawność dla rozwiązań dla danych typu double oraz LZespolona.
+// Wyniki zostały porównane z obliczeniami 'na kartce' oraz z kalkulatorem
+// online są zgodne. Na podstawie tych i wielu wcześniejszych testów
 // poszczególnych funkcji - program działa poprawnie.
-// Program działa poprawnie również po zmianie zadanego rozmiaru.
 
 int main()
 {
@@ -38,7 +38,7 @@ int main()
        }
   default:
     {
-      cerr << "Niepoprawny typ równania" << endl;
+      cerr << "Niepoprawny typ równania, dopuszczalne typy to 'r' (double) oraz 'z' (LZespolona)" << endl;
     }
   }
 
